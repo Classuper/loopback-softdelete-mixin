@@ -1,25 +1,25 @@
 import _debug from './debug';
 const debug = _debug();
 
-export default (Model, { deletedAt = 'deletedAt', scrub = false }) => {
+export default (Model, { deletedAt = 'deletedAt', scrub = false, properties = {} }) => {
   debug('SoftDelete mixin for Model %s', Model.modelName);
 
-  debug('options', { deletedAt, scrub });
+  debug('options', { deletedAt, scrub, properties });
 
-  const properties = Model.definition.properties;
+  const props = Model.definition.properties;
   const idName = Model.dataSource.idName(Model.modelName);
 
   let scrubbed = {};
   if (scrub !== false) {
-    let propertiesToScrub = scrub;
-    if (!Array.isArray(propertiesToScrub)) {
-      propertiesToScrub = Object.keys(properties)
-        .filter(prop => !properties[prop][idName] && prop !== deletedAt);
+    let propsToScrub = scrub;
+    if (!Array.isArray(propsToScrub)) {
+      propsToScrub = Object.keys(props)
+        .filter(prop => !props[prop][idName] && prop !== deletedAt);
     }
-    scrubbed = propertiesToScrub.reduce((obj, prop) => ({ ...obj, [prop]: null }), {});
+    scrubbed = propsToScrub.reduce((obj, prop) => ({ ...obj, [prop]: null }), {});
   }
 
-  Model.defineProperty(deletedAt, {type: Date, required: false});
+  Model.defineProperty(deletedAt, { type: Date, required: false, ...properties });
 
   Model.destroyAll = function softDestroyAll(where, cb) {
     return Model.updateAll(where, { ...scrubbed, [deletedAt]: new Date() })
