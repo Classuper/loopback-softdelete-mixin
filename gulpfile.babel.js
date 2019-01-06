@@ -5,7 +5,7 @@ import path from 'path';
 
 const paths = {
   es6: ['src/*.js'],
-  es5: '.',
+  es5: './lib',
   sourceRoot: path.join(__dirname, 'dist'),
 };
 
