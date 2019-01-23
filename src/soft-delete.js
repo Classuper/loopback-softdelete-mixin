@@ -78,9 +78,6 @@ export default (Model, { deletedAt = 'deletedAt', scrub = false, properties = {}
 
     return _find.call(Model, query, ...rest);
   };
-  Model._find = function _find (...rest) {
-    return _find.call(Model, ...rest)
-  }
 
   const _count = Model.count;
   Model.count = function countDeleted(where = {}, ...rest) {
@@ -93,9 +90,6 @@ export default (Model, { deletedAt = 'deletedAt', scrub = false, properties = {}
     }
     return _count.call(Model, whereNotDeleted, ...rest);
   };
-  Model._count = function _count (...rest) {
-    return _count.call(Model, ...rest)
-  }
 
   const _update = Model.update;
   Model.update = Model.updateAll = function updateDeleted(where = {}, ...rest) {
@@ -108,4 +102,8 @@ export default (Model, { deletedAt = 'deletedAt', scrub = false, properties = {}
     }
     return _update.call(Model, whereNotDeleted, ...rest);
   };
+
+  // Keep loopback methods
+  Model._find = (...rest) => _find.call(Model, ...rest)
+  Model._count = (...rest) => _count.call(Model, ...rest)
 };
