@@ -103,7 +103,7 @@ export default (Model, { deletedAt = 'deletedAt', scrub = false, properties = {}
     return _update.call(Model, whereNotDeleted, ...rest);
   };
 
-  // Keep loopback methods
+  // Keep access to original loopback methods
   Model._find = (...rest) => _find.call(Model, ...rest)
   Model._count = (...rest) => _count.call(Model, ...rest)
 };
