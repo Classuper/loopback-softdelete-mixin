@@ -91,6 +91,10 @@ export default (Model, { deletedAt = 'deletedAt', scrub = false, properties = {}
     return _count.call(Model, whereNotDeleted, ...rest);
   };
 
+  Model.countAll = function countAll (...rest) {
+    return _count.call(Model, ...rest)
+  }
+
   const _update = Model.update;
   Model.update = Model.updateAll = function updateDeleted(where = {}, ...rest) {
     // Because update/updateAll only receives a 'where', there's nowhere to ask for the deleted entities.
