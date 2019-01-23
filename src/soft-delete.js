@@ -78,6 +78,9 @@ export default (Model, { deletedAt = 'deletedAt', scrub = false, properties = {}
 
     return _find.call(Model, query, ...rest);
   };
+  Model._find = function _find (...rest) {
+    return _find.call(Model, ...rest)
+  }
 
   const _count = Model.count;
   Model.count = function countDeleted(where = {}, ...rest) {
@@ -90,8 +93,7 @@ export default (Model, { deletedAt = 'deletedAt', scrub = false, properties = {}
     }
     return _count.call(Model, whereNotDeleted, ...rest);
   };
-
-  Model.countAll = function countAll (...rest) {
+  Model._count = function _count (...rest) {
     return _count.call(Model, ...rest)
   }
 
