@@ -1,6 +1,6 @@
 {
   "name": "@classuper/loopback-softdelete-mixin",
-  "version": "0.0.11",
+  "version": "1.0.0",
   "description": "A mixin to provide soft deletes by adding a deletedAt attribute for loopback Models",
   "main": "lib/index.js",
   "engines": {
