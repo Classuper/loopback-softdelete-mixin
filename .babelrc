@@ -7,13 +7,12 @@
     }]
   ],
   "plugins": [
-    "@babel/plugin-transform-modules-commonjs",
     "@babel/plugin-transform-runtime",
-    "@babel/plugin-proposal-object-rest-spread"
+    "babel-plugin-add-module-exports"
   ],
   "env": {
     "test": {
-      "plugins": [ "istanbul" ]
+      "plugins": ["istanbul"]
     }
   }
 }

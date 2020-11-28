@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A mixin to provide soft deletes by adding a deletedAt attribute for loopback Models",
   "main": "lib/index.js",
+  "license": "MIT",
   "engines": {
     "node": ">=13"
   },
@@ -40,12 +41,11 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
-    "@babel/plugin-proposal-object-rest-spread": "^7.12.1",
-    "@babel/plugin-transform-modules-commonjs": "^7.12.1",
     "@babel/plugin-transform-runtime": "^7.12.1",
     "@babel/preset-env": "^7.12.7",
     "@babel/register": "^7.12.1",
     "babel-eslint": "^10.1.0",
+    "babel-plugin-add-module-exports": "^1.0.4",
     "babel-plugin-istanbul": "^6.0.0",
     "chai": "^4.2.0",
     "cross-env": "^7.0.2",
@@ -63,8 +63,5 @@
     "loopback-boot": "2.x",
     "mocha": "^8.2.1",
     "nyc": "^15.1.0"
-  },
-  "peerDependencies": {
-    "loopback-datasource-juggler": "3.x"
   }
 }
