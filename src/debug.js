@@ -1,3 +1,3 @@
-import debug from 'debug';
+import debug from 'debug'
 
-export default (name = 'soft-delete') => debug(`loopback:mixins:${name}`);
+export default (name = 'soft-delete') => debug(`loopback:mixins:${name}`)

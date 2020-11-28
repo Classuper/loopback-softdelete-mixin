@@ -1,11 +1,10 @@
-node_modules/
+/.idea/
+/.nyc_output/
 coverage/
+lib/
+node_modules/
+
 npm-debug.log
 yarn.lock
-
-/.idea/
-/debug.js
-/index.js
-/soft-delete.js
-
+package-lock.json
 *.sublime-*

@@ -1,0 +1,6 @@
+{
+  "reporter": "spec",
+  "require": "@babel/register",
+  "ui": "bdd",
+  "exit": true
+}

@@ -1,4 +1,19 @@
 {
-  "presets": ["es2015"],
-  "plugins": ["add-module-exports", "transform-runtime", "transform-object-rest-spread"]
+  "presets": [
+    ["@babel/preset-env", {
+      "targets": {
+        "node": "13"
+      }
+    }]
+  ],
+  "plugins": [
+    "@babel/plugin-transform-modules-commonjs",
+    "@babel/plugin-transform-runtime",
+    "@babel/plugin-proposal-object-rest-spread"
+  ],
+  "env": {
+    "test": {
+      "plugins": [ "istanbul" ]
+    }
+  }
 }

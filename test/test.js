@@ -1,4 +1,3 @@
-/* eslint-env mocha */
 import { assert } from 'chai';
 import loopback from 'loopback';
 
