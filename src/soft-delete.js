@@ -22,6 +22,7 @@ export default (Model, { deletedAt = 'deletedAt', scrub = false, properties = {}
 
   Model.defineProperty(deletedAt, { type: Date, required: false, ...properties })
 
+  const _destroyAll = Model.destroyAll
   Model.destroyAll = function softDestroyAll (where, cb) {
     return Model.updateAll(where, { ...scrubbed, [deletedAt]: new Date() })
       .then((result) => ((typeof cb === 'function') ? cb(null, result) : result))
@@ -31,6 +32,7 @@ export default (Model, { deletedAt = 'deletedAt', scrub = false, properties = {}
   Model.remove = Model.destroyAll
   Model.deleteAll = Model.destroyAll
 
+  const _destroyById = Model.destroyById
   Model.destroyById = function softDestroyById (id, cb) {
     return Model.updateAll({ [idName]: id }, { ...scrubbed, [deletedAt]: new Date() })
       .then((result) => ((typeof cb === 'function') ? cb(null, result) : result))
@@ -40,6 +42,7 @@ export default (Model, { deletedAt = 'deletedAt', scrub = false, properties = {}
   Model.removeById = Model.destroyById
   Model.deleteById = Model.destroyById
 
+  const _destroy = Model.prototype.destroy
   Model.prototype.destroy = function softDestroy (options, cb) {
     const callback = (cb === undefined && typeof options === 'function') ? options : cb
 
@@ -105,6 +108,10 @@ export default (Model, { deletedAt = 'deletedAt', scrub = false, properties = {}
   }
 
   // Keep access to original loopback methods
+  Model._destroyAll = (...rest) => _destroyAll.call(Model, ...rest)
+  Model._destroyById = (...rest) => _destroyById.call(Model, ...rest)
   Model._find = (...rest) => _find.call(Model, ...rest)
   Model._count = (...rest) => _count.call(Model, ...rest)
+
+  Model.prototype._destroy = (...rest) => _destroy.call(Model.prototype, ...rest)
 }
